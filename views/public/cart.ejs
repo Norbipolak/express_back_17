@@ -1,0 +1,39 @@
+<div class="container">
+    <h1>Kosár</h1>
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <td>Terméknév</td>
+                <td>Mennyiség</td>
+                <td>Ár</td>
+                <td>Részösszeg</td>
+                <td>Törlés</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% cart.forEach((c)=> { %>
+                <tr>
+                    <td><%=c.productName%></td>
+                    <td><%=c.quantity%></td>
+                    <td>
+                        <%c.price.toLocalString('hu-HU' {
+                        style: 'currency',
+                        currency: 'HUF'
+                    });%>
+                    </td>
+                    <td>
+                        <%(c.price * c.quantity).toLocalString('hu-HU' {
+                        style: 'currency',
+                        currency: 'HUF'
+                    });%>
+                    </td>
+                    <td>
+                        <form method="POST" action="<%=baseUrl%>/remove-cart-product/<%=c.productID%>">
+                            <button>Törlés</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
